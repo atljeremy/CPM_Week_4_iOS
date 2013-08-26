@@ -48,6 +48,8 @@
             }
             completionBlock(error);
         }];
+    } else {
+        completionBlock(nil);
     }
 }
 

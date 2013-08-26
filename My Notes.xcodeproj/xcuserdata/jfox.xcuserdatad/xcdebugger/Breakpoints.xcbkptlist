@@ -60,24 +60,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "My Notes/API Client/AFAppWebServiceClient.m"
-         timestampString = "399173130.254977"
+         timestampString = "399173732.45806"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "105"
          endingLineNumber = "105"
-         landmarkName = "+synchronize"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "My Notes/API Client/AFAppWebServiceClient.m"
-         timestampString = "399173130.715149"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "107"
-         endingLineNumber = "107"
          landmarkName = "+synchronize"
          landmarkType = "5">
       </FileBreakpoint>

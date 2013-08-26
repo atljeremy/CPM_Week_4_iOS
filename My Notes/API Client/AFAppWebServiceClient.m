@@ -101,11 +101,16 @@ static NSString* const kAPIUniqueIdKey = @"unique_id";
 
 + (void)synchronize
 {
-    [SyncR getNotesFromAPIWithSuccess:^(NSArray *notes) {
-        NSLog(@"NOTES: %@", notes);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Failed!");
+    [SyncR sendUnsyncedNotesToAPIWithCompletionBlock:^(NSError *error) {
+        if (!error) {
+            [SyncR getNotesFromAPIWithSuccess:^(NSArray *notes) {
+                NSLog(@"NOTES: %@", notes);
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                NSLog(@"Failed!");
+            }];
+        }
     }];
+    
 }
 
 @end
