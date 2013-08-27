@@ -17,7 +17,7 @@
 + (instancetype)sharedInstance;
 + (NSManagedObjectContext*)getContext;
 + (NSManagedObjectContext*)newContext;
-- (void)saveContext;
+- (BOOL)saveContext;
 - (void)registerForContextSavedNotifications;
 
 @end

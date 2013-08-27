@@ -11,10 +11,10 @@
 @interface TempNote : NSObject
 
 @property (nonatomic, strong) NSNumber* apiNoteId;
-@property (nonatomic, strong) NSDate* createdAt;
+@property (nonatomic, strong) NSString* createdAt;
+@property (nonatomic, strong) NSString* updatedAt;
 @property (nonatomic, strong) NSString* details;
 @property (nonatomic, strong) NSString* title;
-@property (nonatomic, strong) NSDate* updatedAt;
 @property (nonatomic, strong) User *user;
 
 @end

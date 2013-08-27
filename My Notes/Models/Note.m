@@ -1,5 +1,11 @@
 #import "Note.h"
 
+NSString* const kNoteIdKey = @"id";
+NSString* const kNoteTitleKey = @"title";
+NSString* const kNoteDetailsKey = @"details";
+NSString* const kNoteCreatedAtKey = @"created_at";
+NSString* const kNoteUpdatedAtKey = @"updated_at";
+
 NSString* SortDescriptorForSortOption(NoteSortOption sortOption) {
     NSString* sortDescriptor = @"";
     switch (sortOption) {
@@ -26,19 +32,19 @@ NSString* SortDescriptorForSortOption(NoteSortOption sortOption) {
     Note* newNote = nil;
     NSManagedObjectContext* context = [JFCoreDataManager getContext];
     if (note && context) {
-        newNote           = [self insertInManagedObjectContext:context];
+        newNote           = [self getNoteByAPIId:note.apiNoteId];
+        newNote           = (newNote) ? newNote : [self insertInManagedObjectContext:context];
         newNote.title     = note.title;
         newNote.details   = note.details;
         NSDate* now       = [NSDate date];
-        newNote.createdAt = now;
-        newNote.updatedAt = now;
-        newNote.apiNoteId = [NSNumber numberWithInt:-1];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+        [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZ"]; // 2013-08-20T02:11:39Z
+        newNote.createdAt = (note.createdAt) ? [formatter dateFromString:note.createdAt] : now;
+        newNote.updatedAt = (note.updatedAt) ? [formatter dateFromString:note.updatedAt] : now;
+        newNote.apiNoteId = (note.apiNoteId) ? note.apiNoteId : [NSNumber numberWithInt:-1];
         
-        NSError* error;
-        if (![context save:&error]) {
-            // Handle the error.
-            
-            NSLog(@"%@", error.localizedDescription);
+        if (![[JFCoreDataManager sharedInstance] saveContext]) {
+            newNote = nil;
         }
     }
     return newNote;
@@ -51,36 +57,45 @@ NSString* SortDescriptorForSortOption(NoteSortOption sortOption) {
     if (note && context) {
         [context deleteObject:note];
         
-        NSError* error;
-        if (![context save:&error]) {
-            // Handle the error.
-            
-            removed = NO;
-            NSLog(@"%@", error.localizedDescription);
-        }
+        removed = [[JFCoreDataManager sharedInstance] saveContext];
     }
     return removed;
 }
 
-+ (BOOL)updateNote:(Note*)note withNote:(Note*)upatedNote
++ (BOOL)updateNote:(Note*)note withTempNote:(TempNote*)tempNote
 {
     BOOL updated = YES;
     NSManagedObjectContext* context = [JFCoreDataManager getContext];
-    if (note && context) {
-        note.title     = upatedNote.title;
-        note.details   = upatedNote.details;
-        note.createdAt = upatedNote.createdAt;
+    if (note && tempNote && context) {
+        note.title     = tempNote.title;
+        note.details   = tempNote.details;
         note.updatedAt = [NSDate date];
         
-        NSError* error;
-        if (![context save:&error]) {
-            // Handle the error.
-            
-            updated = NO;
-            NSLog(@"%@", error.localizedDescription);
-        }
+        updated = [[JFCoreDataManager sharedInstance] saveContext];
     }
     return updated;
+}
+
++ (Note*)getNoteByAPIId:(NSNumber*)apiId
+{
+    Note* note = nil;
+    NSManagedObjectContext* context = [JFCoreDataManager getContext];
+    if (context) {
+        NSFetchRequest *request = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:[Note entityName]
+                                                  inManagedObjectContext:context];
+        [request setEntity:entity];
+        
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"apiNoteId = %@", apiId];
+        [request setPredicate:predicate];
+        
+        NSError *error = nil;
+        NSArray* notes = [context executeFetchRequest:request error:&error];
+        if (notes != nil && notes.count == 1) {
+            note = [notes lastObject];
+        }
+    }
+    return note;
 }
 
 + (NSArray*)allNotesSortedBy:(NoteSortOption)sortOption ascending:(BOOL)asc
@@ -117,7 +132,7 @@ NSString* SortDescriptorForSortOption(NoteSortOption sortOption) {
                                                   inManagedObjectContext:context];
         [request setEntity:entity];
         
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"apiNoteId = %@", [NSNumber numberWithInt:-1], [NSNumber numberWithBool:NO]];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"apiNoteId = %@", [NSNumber numberWithInt:-1]];
         [request setPredicate:predicate];
         
         NSString* key = SortDescriptorForSortOption(NoteSortOptionCREATED);
@@ -132,6 +147,30 @@ NSString* SortDescriptorForSortOption(NoteSortOption sortOption) {
         }
     }
     return notes;
+}
+
+- (BOOL)updateUpdatedAt
+{
+    BOOL updated = YES;
+    NSManagedObjectContext* context = [JFCoreDataManager getContext];
+    if (context) {
+        self.updatedAt = [NSDate date];
+        
+        updated = [[JFCoreDataManager sharedInstance] saveContext];
+    }
+    return updated;
+}
+
+- (BOOL)updateApiId:(NSNumber*)apiId
+{
+    BOOL updated = YES;
+    NSManagedObjectContext* context = [JFCoreDataManager getContext];
+    if (apiId && context) {
+        self.apiNoteId = apiId;
+        
+        updated = [[JFCoreDataManager sharedInstance] saveContext];
+    }
+    return updated;
 }
 
 @end

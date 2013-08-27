@@ -15,7 +15,18 @@
 {
     NSDictionary* params = [self buildParams:nil];
     [[AFAppWebServiceClient sharedClient] getPath:@"notes.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        success(responseObject);
+        
+        for (NSDictionary* note in responseObject) {
+            TempNote* tempNote = [[TempNote alloc] init];
+            tempNote.title = [note objectForKey:kNoteTitleKey];
+            tempNote.details = [note objectForKey:kNoteDetailsKey];
+            tempNote.createdAt = [note objectForKey:kNoteCreatedAtKey];
+            tempNote.updatedAt = [note objectForKey:kNoteUpdatedAtKey];
+            tempNote.apiNoteId = [note objectForKey:kNoteIdKey];
+            [Note addNote:tempNote];
+        }
+        
+        success([Note allNotesSortedBy:NoteSortOptionCREATED ascending:YES]);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         failure(operation, error);
     }];

@@ -28,18 +28,18 @@
 
 #pragma mark - Core Data stack
 
-- (void)saveContext
+- (BOOL)saveContext
 {
     NSError *error = nil;
     NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
-    if (managedObjectContext != nil) {
-        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
-            // Replace this implementation with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            abort();
-        }
+    if (managedObjectContext && [managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
+        NSLog(@"An Error Occurred while Trying to Save Context: %@", error.localizedDescription);
     }
+    
+    if (error) {
+        return NO;
+    }
+    return YES;
 }
 
 // Returns the managed object context for the application.

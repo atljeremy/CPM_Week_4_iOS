@@ -1,5 +1,8 @@
 #import "User.h"
 
+NSString* const kUserIdKey = @"id";
+NSString* const kUserUniqueIdKey = @"unique_id";
+
 @implementation User
 
 + (User*)addUser:(TempUser*)user

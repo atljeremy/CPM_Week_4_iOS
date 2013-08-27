@@ -18,10 +18,6 @@ static NSString* const kAPIPrivateKeySalt = @"M440dOx2105dwLkp18T82dhEo794C17a";
 static NSString* const kHasRegisteredWithAPI = @"HasRegisteredWithAPI";
 static NSString* const kUUIDKey = @"UUIDKey";
 
-// User attributes from API
-static NSString* const kAPIIdKey = @"id";
-static NSString* const kAPIUniqueIdKey = @"unique_id";
-
 @interface AFAppWebServiceClient()
 @property (nonatomic, strong) NSString* apiKey;
 @end
@@ -65,8 +61,8 @@ static NSString* const kAPIUniqueIdKey = @"unique_id";
     if (!user && [JFNetworkObserver isConnected]) {
         [[AFAppWebServiceClient sharedClient] postPath:@"users.json" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject){
             NSLog(@"RESPONSE: %@", responseObject);
-            NSNumber* Id = [responseObject objectForKey:kAPIIdKey];
-            NSString* uniqueId = [responseObject objectForKey:kAPIUniqueIdKey];
+            NSNumber* Id = [responseObject objectForKey:kUserIdKey];
+            NSString* uniqueId = [responseObject objectForKey:kUserUniqueIdKey];
             if (Id && uniqueId) {
                 uniqueId = [uniqueId stringByReplacingOccurrencesOfString:@"\n" withString:@""];
                 

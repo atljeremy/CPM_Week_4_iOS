@@ -2,6 +2,9 @@
 #import "TempUser.h"
 #import "Note.h"
 
+extern NSString* const kUserIdKey;
+extern NSString* const kUserUniqueIdKey;
+
 @interface User : _User
 
 + (User*)addUser:(TempUser*)user;
