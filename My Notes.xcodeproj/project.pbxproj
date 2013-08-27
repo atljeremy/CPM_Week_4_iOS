@@ -44,6 +44,9 @@
 		1A48B4F317CABBE800DF0BB6 /* TempNote.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A48B4F217CABBE700DF0BB6 /* TempNote.m */; };
 		1A48B4F817CABF8C00DF0BB6 /* Environment.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A48B4F617CABF8C00DF0BB6 /* Environment.m */; };
 		1A48B4FB17CABFC100DF0BB6 /* SyncR.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A48B4FA17CABFC100DF0BB6 /* SyncR.m */; };
+		1A5A8D4017CC2BE500CBEAFB /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A5A8D3F17CC2BE500CBEAFB /* BaseNavigationController.m */; };
+		1A5A8D4417CC2DBD00CBEAFB /* NotesCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A5A8D4317CC2DBD00CBEAFB /* NotesCollectionViewController.m */; };
+		1A5A8D4817CC2E1A00CBEAFB /* NotesCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A5A8D4717CC2E1A00CBEAFB /* NotesCollectionViewCell.m */; };
 		1A5FEEFE17CA6943001F8A3B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A5FEEFD17CA6943001F8A3B /* UIKit.framework */; };
 		1A5FEF0017CA6943001F8A3B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A5FEEFF17CA6943001F8A3B /* Foundation.framework */; };
 		1A5FEF0217CA6943001F8A3B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A5FEF0117CA6943001F8A3B /* CoreGraphics.framework */; };
@@ -125,6 +128,12 @@
 		1A48B4F617CABF8C00DF0BB6 /* Environment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Environment.m; sourceTree = "<group>"; };
 		1A48B4F917CABFC100DF0BB6 /* SyncR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncR.h; sourceTree = "<group>"; };
 		1A48B4FA17CABFC100DF0BB6 /* SyncR.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncR.m; sourceTree = "<group>"; };
+		1A5A8D3E17CC2BE500CBEAFB /* BaseNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavigationController.h; sourceTree = "<group>"; };
+		1A5A8D3F17CC2BE500CBEAFB /* BaseNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationController.m; sourceTree = "<group>"; };
+		1A5A8D4217CC2DBD00CBEAFB /* NotesCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesCollectionViewController.h; sourceTree = "<group>"; };
+		1A5A8D4317CC2DBD00CBEAFB /* NotesCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesCollectionViewController.m; sourceTree = "<group>"; };
+		1A5A8D4617CC2E1A00CBEAFB /* NotesCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesCollectionViewCell.h; sourceTree = "<group>"; };
+		1A5A8D4717CC2E1A00CBEAFB /* NotesCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesCollectionViewCell.m; sourceTree = "<group>"; };
 		1A5FEEFA17CA6943001F8A3B /* My Notes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "My Notes.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A5FEEFD17CA6943001F8A3B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		1A5FEEFF17CA6943001F8A3B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -353,6 +362,34 @@
 			path = Synchronization;
 			sourceTree = "<group>";
 		};
+		1A5A8D3D17CC2BE500CBEAFB /* Navigation Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1A5A8D3E17CC2BE500CBEAFB /* BaseNavigationController.h */,
+				1A5A8D3F17CC2BE500CBEAFB /* BaseNavigationController.m */,
+			);
+			path = "Navigation Controllers";
+			sourceTree = "<group>";
+		};
+		1A5A8D4117CC2D9500CBEAFB /* Collection View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1A5A8D4517CC2DF700CBEAFB /* Collection View Item */,
+				1A5A8D4217CC2DBD00CBEAFB /* NotesCollectionViewController.h */,
+				1A5A8D4317CC2DBD00CBEAFB /* NotesCollectionViewController.m */,
+			);
+			path = "Collection View Controller";
+			sourceTree = "<group>";
+		};
+		1A5A8D4517CC2DF700CBEAFB /* Collection View Item */ = {
+			isa = PBXGroup;
+			children = (
+				1A5A8D4617CC2E1A00CBEAFB /* NotesCollectionViewCell.h */,
+				1A5A8D4717CC2E1A00CBEAFB /* NotesCollectionViewCell.m */,
+			);
+			path = "Collection View Item";
+			sourceTree = "<group>";
+		};
 		1A5FEEF117CA6943001F8A3B = {
 			isa = PBXGroup;
 			children = (
@@ -391,8 +428,10 @@
 			children = (
 				1A48B4AA17CA79EF00DF0BB6 /* Application */,
 				1A48B4A617CA799E00DF0BB6 /* API Client */,
+				1A5A8D4117CC2D9500CBEAFB /* Collection View Controller */,
 				1A48B47317CA6C9F00DF0BB6 /* Managers */,
 				1A48B46B17CA6C2800DF0BB6 /* Models */,
+				1A5A8D3D17CC2BE500CBEAFB /* Navigation Controllers */,
 				1A5FEF0417CA6943001F8A3B /* Supporting Files */,
 				1A48B48417CA78F700DF0BB6 /* Vendor */,
 				1A48B46E17CA6C2800DF0BB6 /* View Controllers */,
@@ -514,6 +553,9 @@
 				1A48B4F317CABBE800DF0BB6 /* TempNote.m in Sources */,
 				1A48B4F817CABF8C00DF0BB6 /* Environment.m in Sources */,
 				1A48B4FB17CABFC100DF0BB6 /* SyncR.m in Sources */,
+				1A5A8D4017CC2BE500CBEAFB /* BaseNavigationController.m in Sources */,
+				1A5A8D4417CC2DBD00CBEAFB /* NotesCollectionViewController.m in Sources */,
+				1A5A8D4817CC2E1A00CBEAFB /* NotesCollectionViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
