@@ -39,7 +39,6 @@ static NSString* const kIsFirstAppLaunch = @"kIsFirstAppLaunch";
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     [AFAppWebServiceClient registerClientWithAPI];
-    [AFAppWebServiceClient synchronize];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application

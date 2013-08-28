@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1A48B47217CA6C2800DF0BB6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A48B47017CA6C2800DF0BB6 /* ViewController.m */; };
 		1A48B47617CA6CC300DF0BB6 /* JFCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A48B47517CA6CC300DF0BB6 /* JFCoreDataManager.m */; };
 		1A48B47A17CA727300DF0BB6 /* JFNetworkObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A48B47917CA727300DF0BB6 /* JFNetworkObserver.m */; };
 		1A48B47D17CA73BF00DF0BB6 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A48B47C17CA73BF00DF0BB6 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -47,6 +46,12 @@
 		1A5A8D4017CC2BE500CBEAFB /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A5A8D3F17CC2BE500CBEAFB /* BaseNavigationController.m */; };
 		1A5A8D4417CC2DBD00CBEAFB /* NotesCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A5A8D4317CC2DBD00CBEAFB /* NotesCollectionViewController.m */; };
 		1A5A8D4817CC2E1A00CBEAFB /* NotesCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A5A8D4717CC2E1A00CBEAFB /* NotesCollectionViewCell.m */; };
+		1A5EBA1E17CD77DB005B8935 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A5EBA1D17CD77DB005B8935 /* QuartzCore.framework */; };
+		1A5EBA2417CD7886005B8935 /* btn_sync_active.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A5EBA2017CD7886005B8935 /* btn_sync_active.png */; };
+		1A5EBA2517CD7886005B8935 /* btn_sync_active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A5EBA2117CD7886005B8935 /* btn_sync_active@2x.png */; };
+		1A5EBA2617CD7886005B8935 /* btn_sync_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A5EBA2217CD7886005B8935 /* btn_sync_pressed.png */; };
+		1A5EBA2717CD7886005B8935 /* btn_sync_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A5EBA2317CD7886005B8935 /* btn_sync_pressed@2x.png */; };
+		1A5EBA2A17CD80EF005B8935 /* NewNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A5EBA2917CD80EF005B8935 /* NewNoteViewController.m */; };
 		1A5FEEFE17CA6943001F8A3B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A5FEEFD17CA6943001F8A3B /* UIKit.framework */; };
 		1A5FEF0017CA6943001F8A3B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A5FEEFF17CA6943001F8A3B /* Foundation.framework */; };
 		1A5FEF0217CA6943001F8A3B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A5FEF0117CA6943001F8A3B /* CoreGraphics.framework */; };
@@ -60,8 +65,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1A48B46F17CA6C2800DF0BB6 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		1A48B47017CA6C2800DF0BB6 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		1A48B47417CA6CC300DF0BB6 /* JFCoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFCoreDataManager.h; sourceTree = "<group>"; };
 		1A48B47517CA6CC300DF0BB6 /* JFCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFCoreDataManager.m; sourceTree = "<group>"; };
 		1A48B47817CA727300DF0BB6 /* JFNetworkObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFNetworkObserver.h; sourceTree = "<group>"; };
@@ -134,6 +137,13 @@
 		1A5A8D4317CC2DBD00CBEAFB /* NotesCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesCollectionViewController.m; sourceTree = "<group>"; };
 		1A5A8D4617CC2E1A00CBEAFB /* NotesCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesCollectionViewCell.h; sourceTree = "<group>"; };
 		1A5A8D4717CC2E1A00CBEAFB /* NotesCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesCollectionViewCell.m; sourceTree = "<group>"; };
+		1A5EBA1D17CD77DB005B8935 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		1A5EBA2017CD7886005B8935 /* btn_sync_active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_sync_active.png; sourceTree = "<group>"; };
+		1A5EBA2117CD7886005B8935 /* btn_sync_active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_sync_active@2x.png"; sourceTree = "<group>"; };
+		1A5EBA2217CD7886005B8935 /* btn_sync_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_sync_pressed.png; sourceTree = "<group>"; };
+		1A5EBA2317CD7886005B8935 /* btn_sync_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_sync_pressed@2x.png"; sourceTree = "<group>"; };
+		1A5EBA2817CD80EF005B8935 /* NewNoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewNoteViewController.h; path = "My Notes/Resources/NewNoteViewController.h"; sourceTree = SOURCE_ROOT; };
+		1A5EBA2917CD80EF005B8935 /* NewNoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewNoteViewController.m; path = "My Notes/Resources/NewNoteViewController.m"; sourceTree = SOURCE_ROOT; };
 		1A5FEEFA17CA6943001F8A3B /* My Notes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "My Notes.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A5FEEFD17CA6943001F8A3B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		1A5FEEFF17CA6943001F8A3B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -154,6 +164,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A5EBA1E17CD77DB005B8935 /* QuartzCore.framework in Frameworks */,
 				1A48B4CF17CA904300DF0BB6 /* AdSupport.framework in Frameworks */,
 				1A48B4CD17CA902800DF0BB6 /* CoreTelephony.framework in Frameworks */,
 				1A48B4A517CA792E00DF0BB6 /* Security.framework in Frameworks */,
@@ -190,8 +201,8 @@
 		1A48B46E17CA6C2800DF0BB6 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				1A48B46F17CA6C2800DF0BB6 /* ViewController.h */,
-				1A48B47017CA6C2800DF0BB6 /* ViewController.m */,
+				1A5EBA2817CD80EF005B8935 /* NewNoteViewController.h */,
+				1A5EBA2917CD80EF005B8935 /* NewNoteViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -390,6 +401,17 @@
 			path = "Collection View Item";
 			sourceTree = "<group>";
 		};
+		1A5EBA1F17CD7886005B8935 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1A5EBA2017CD7886005B8935 /* btn_sync_active.png */,
+				1A5EBA2117CD7886005B8935 /* btn_sync_active@2x.png */,
+				1A5EBA2217CD7886005B8935 /* btn_sync_pressed.png */,
+				1A5EBA2317CD7886005B8935 /* btn_sync_pressed@2x.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		1A5FEEF117CA6943001F8A3B = {
 			isa = PBXGroup;
 			children = (
@@ -410,6 +432,7 @@
 		1A5FEEFC17CA6943001F8A3B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1A5EBA1D17CD77DB005B8935 /* QuartzCore.framework */,
 				1A48B4CE17CA904200DF0BB6 /* AdSupport.framework */,
 				1A48B4CC17CA902800DF0BB6 /* CoreTelephony.framework */,
 				1A48B4A417CA792E00DF0BB6 /* Security.framework */,
@@ -432,6 +455,7 @@
 				1A48B47317CA6C9F00DF0BB6 /* Managers */,
 				1A48B46B17CA6C2800DF0BB6 /* Models */,
 				1A5A8D3D17CC2BE500CBEAFB /* Navigation Controllers */,
+				1A5EBA1F17CD7886005B8935 /* Resources */,
 				1A5FEF0417CA6943001F8A3B /* Supporting Files */,
 				1A48B48417CA78F700DF0BB6 /* Vendor */,
 				1A48B46E17CA6C2800DF0BB6 /* View Controllers */,
@@ -511,6 +535,10 @@
 				1A5FEF1417CA6943001F8A3B /* Default-568h@2x.png in Resources */,
 				1A5FEF1717CA6943001F8A3B /* MainStoryboard.storyboard in Resources */,
 				1A48B4D117CA975E00DF0BB6 /* gen-model.sh in Resources */,
+				1A5EBA2417CD7886005B8935 /* btn_sync_active.png in Resources */,
+				1A5EBA2517CD7886005B8935 /* btn_sync_active@2x.png in Resources */,
+				1A5EBA2617CD7886005B8935 /* btn_sync_pressed.png in Resources */,
+				1A5EBA2717CD7886005B8935 /* btn_sync_pressed@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -522,7 +550,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A5FEF0A17CA6943001F8A3B /* main.m in Sources */,
-				1A48B47217CA6C2800DF0BB6 /* ViewController.m in Sources */,
 				1A48B47617CA6CC300DF0BB6 /* JFCoreDataManager.m in Sources */,
 				1A48B47A17CA727300DF0BB6 /* JFNetworkObserver.m in Sources */,
 				1A48B47D17CA73BF00DF0BB6 /* Reachability.m in Sources */,
@@ -556,6 +583,7 @@
 				1A5A8D4017CC2BE500CBEAFB /* BaseNavigationController.m in Sources */,
 				1A5A8D4417CC2DBD00CBEAFB /* NotesCollectionViewController.m in Sources */,
 				1A5A8D4817CC2E1A00CBEAFB /* NotesCollectionViewCell.m in Sources */,
+				1A5EBA2A17CD80EF005B8935 /* NewNoteViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

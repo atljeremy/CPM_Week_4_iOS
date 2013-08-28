@@ -8,8 +8,10 @@
 
 #import "NotesCollectionViewController.h"
 #import "NotesCollectionViewCell.h"
+#import <QuartzCore/QuartzCore.h>
 
 static NSString* const kCollectionCellReuseID = @"NotesCollectionViewCell";
+static NSString* const kPresentNewNoteViewController = @"PresentNewNoteViewController";
 
 @interface NotesCollectionViewController ()
 @property (nonatomic, strong) User* user;
@@ -29,15 +31,61 @@ static NSString* const kCollectionCellReuseID = @"NotesCollectionViewCell";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	self.user = [User userWithNotesSortedBy:NoteSortOptionCREATED ascending:YES];
-    self.notes = [self.user.notes allObjects];
-    [self.collectionView reloadData];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(startRotatingArrows)
+                                                 name:kSyncDidStartNotification
+                                               object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(loadNotes)
+                                                 name:kSyncDidFinishNotification
+                                               object:nil];
+    [self loadNotes];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self syncNotes:self];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)startRotatingArrows
+{
+    CABasicAnimation *halfTurn;
+    halfTurn = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+    halfTurn.fromValue = [NSNumber numberWithFloat:0];
+    halfTurn.toValue = [NSNumber numberWithFloat:((360*M_PI)/180)];
+    halfTurn.duration = 1.0;
+    halfTurn.repeatCount = HUGE_VALF;
+    [[self.syncBtn layer] addAnimation:halfTurn forKey:@"180"];
+}
+
+- (void)stopRotatingArrows
+{
+    [self.syncBtn.layer removeAllAnimations];
+}
+
+- (IBAction)syncNotes:(id)sender
+{
+    [AFAppWebServiceClient synchronize];
+}
+
+- (IBAction)newNote:(id)sender
+{
+    [self performSegueWithIdentifier:kPresentNewNoteViewController sender:self];
+}
+
+- (void)loadNotes
+{
+    self.user = [User userWithNotesSortedBy:NoteSortOptionCREATED ascending:YES];
+    self.notes = [self.user.notes allObjects];
+    [self.collectionView reloadData];
+    [self stopRotatingArrows];
 }
 
 #pragma mark - UICollectionView
@@ -63,6 +111,18 @@ static NSString* const kCollectionCellReuseID = @"NotesCollectionViewCell";
 //    }
     return cell;
 
+}
+
+#pragma mark – UICollectionViewDelegateFlowLayout
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CGSizeMake(150, 150);
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    return UIEdgeInsetsMake(5, 5, 5, 5);
 }
 
 @end

@@ -39,11 +39,13 @@
     
     __block BOOL anOperationFailed = NO;
     NSMutableArray* operations = [@[] mutableCopy];
-    for (Note* note in notes) {
+    for (__block Note* note in notes) {
         NSDictionary* params = [self buildParams:note];
         NSMutableURLRequest* request = [client requestWithMethod:@"POST" path:@"notes.json" parameters:params];
         AFHTTPRequestOperation* operation = [client HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"Successfully synced note with response: %@", responseObject);
+            note.apiNoteId = [responseObject objectForKey:kNoteIdKey];
+            [[JFCoreDataManager sharedInstance] saveContext];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Failed to sync note with error: %@", error.localizedDescription);
             anOperationFailed = YES;

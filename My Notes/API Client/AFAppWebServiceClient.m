@@ -10,6 +10,8 @@
 #import "AFJSONRequestOperation.h"
 #import "SyncR.h"
 
+NSString* const kSyncDidStartNotification = @"SyncDidFinishNotification";
+NSString* const kSyncDidFinishNotification = @"SyncDidFinishNotification";
 NSString* const kAPIStoredPrivateKey = @"APIPrivateKey";
 
 static NSString* const kAFAppWebServiceClientBaseURLString = @"https://young-cove-5823.herokuapp.com/";
@@ -97,12 +99,15 @@ static NSString* const kUUIDKey = @"UUIDKey";
 
 + (void)synchronize
 {
+    [[NSNotificationCenter defaultCenter] postNotificationName:kSyncDidStartNotification object:nil];
     [SyncR sendUnsyncedNotesToAPIWithCompletionBlock:^(NSError *error) {
         if (!error) {
             [SyncR getNotesFromAPIWithSuccess:^(NSArray *notes) {
                 NSLog(@"NOTES: %@", notes);
+                [[NSNotificationCenter defaultCenter] postNotificationName:kSyncDidFinishNotification object:nil];
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 NSLog(@"Failed!");
+                [[NSNotificationCenter defaultCenter] postNotificationName:kSyncDidFinishNotification object:nil];
             }];
         }
     }];

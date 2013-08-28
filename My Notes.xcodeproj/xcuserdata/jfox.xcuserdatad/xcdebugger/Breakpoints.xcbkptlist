@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "My Notes/API Client/AFAppWebServiceClient.m"
-         timestampString = "399250962.407099"
+         timestampString = "399342718.312243"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "82"
-         endingLineNumber = "82"
+         startingLineNumber = "84"
+         endingLineNumber = "84"
          landmarkName = "+registerClientWithAPI"
          landmarkType = "5">
       </FileBreakpoint>
@@ -21,11 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "My Notes/API Client/AFAppWebServiceClient.m"
-         timestampString = "399250962.407099"
+         timestampString = "399342718.312243"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "63"
-         endingLineNumber = "63"
+         startingLineNumber = "65"
+         endingLineNumber = "65"
          landmarkName = "+registerClientWithAPI"
          landmarkType = "5">
       </FileBreakpoint>
@@ -34,11 +34,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "My Notes/Application/Synchronization/SyncR.m"
-         timestampString = "399251361.59356"
+         timestampString = "399345854.15248"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "57"
-         endingLineNumber = "57"
+         startingLineNumber = "59"
+         endingLineNumber = "59"
          landmarkName = "+sendUnsyncedNotesToAPIWithCompletionBlock:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -59,26 +59,13 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "My Notes/API Client/AFAppWebServiceClient.m"
-         timestampString = "399250962.407099"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "101"
-         endingLineNumber = "101"
-         landmarkName = "+synchronize"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "My Notes/Application/Synchronization/SyncR.m"
-         timestampString = "399251361.59356"
+         timestampString = "399345854.15248"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "19"
-         endingLineNumber = "19"
-         landmarkName = "+getNotesFromAPIWithSuccess:failure:"
+         startingLineNumber = "47"
+         endingLineNumber = "47"
+         landmarkName = "+sendUnsyncedNotesToAPIWithCompletionBlock:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

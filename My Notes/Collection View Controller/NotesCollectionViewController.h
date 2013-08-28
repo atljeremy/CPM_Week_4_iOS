@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NotesCollectionViewController : UICollectionViewController
+extern NSString* const kCollectionViewReloadNotification;
+
+@interface NotesCollectionViewController : UICollectionViewController <UICollectionViewDelegateFlowLayout>
+
+@property (weak, nonatomic) IBOutlet UIButton *syncBtn;
+
+- (IBAction)syncNotes:(id)sender;
+- (IBAction)newNote:(id)sender;
 
 @end

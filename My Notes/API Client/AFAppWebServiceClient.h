@@ -8,6 +8,8 @@
 
 #import "AFHTTPClient.h"
 
+extern NSString* const kSyncDidStartNotification;
+extern NSString* const kSyncDidFinishNotification;
 extern NSString* const kAPIStoredPrivateKey;
 
 @interface AFAppWebServiceClient : AFHTTPClient
