@@ -19,9 +19,7 @@
               success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
               failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
-+ (void)deleteNotesFromAPI:(NSArray*)notes
-                   success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                   failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
++ (void)deleteNotesFromAPI:(NSArray*)notes withCompletionBlock:(void (^)(NSError* error))completionBlock;
 
 + (void)updateNoteInAPI:(Note*)note
                 success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success

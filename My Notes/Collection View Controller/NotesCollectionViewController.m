@@ -8,10 +8,13 @@
 
 #import "NotesCollectionViewController.h"
 #import "NotesCollectionViewCell.h"
+#import "SyncR.h"
+#import "NoteDetailsViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
 static NSString* const kCollectionCellReuseID = @"NotesCollectionViewCell";
 static NSString* const kPresentNewNoteViewController = @"PresentNewNoteViewController";
+static NSString* const kPresentNoteDetails = @"PresentNoteDetails";
 
 @interface NotesCollectionViewController ()
 @property (nonatomic, strong) User* user;
@@ -45,7 +48,8 @@ static NSString* const kPresentNewNoteViewController = @"PresentNewNoteViewContr
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self syncNotes:self];
+//    [AFAppWebServiceClient synchronize];
+    [self loadNotes];
 }
 
 - (void)didReceiveMemoryWarning
@@ -88,6 +92,16 @@ static NSString* const kPresentNewNoteViewController = @"PresentNewNoteViewContr
     [self stopRotatingArrows];
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:kPresentNoteDetails]) {
+        if (sender) {
+            Note* note = ((NotesCollectionViewCell*)sender).note;
+            [(NoteDetailsViewController*)segue.destinationViewController setNote:note];
+        }
+    }
+}
+
 #pragma mark - UICollectionView
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -95,14 +109,13 @@ static NSString* const kPresentNewNoteViewController = @"PresentNewNoteViewContr
     return self.notes.count;
 }
 
-// The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NotesCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCollectionCellReuseID forIndexPath:indexPath];
     Note* note = [self.notes objectAtIndex:indexPath.row];
     UILongPressGestureRecognizer *recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
     [cell addGestureRecognizer:recognizer];
-    cell.noteTitle.text = note.title;
+    [cell setNote:note];
 //    cell.photo = photo;
 //    if (!cell.isSelected) {
 //        cell.checkMark.hidden = YES;

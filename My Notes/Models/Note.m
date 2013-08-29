@@ -36,6 +36,7 @@ NSString* SortDescriptorForSortOption(NoteSortOption sortOption) {
         newNote           = (newNote) ? newNote : [self insertInManagedObjectContext:context];
         newNote.title     = note.title;
         newNote.details   = note.details;
+        newNote.deleted   = @NO;
         NSDate* now       = [NSDate date];
         NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
         [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZ"]; // 2013-08-20T02:11:39Z
@@ -50,6 +51,39 @@ NSString* SortDescriptorForSortOption(NoteSortOption sortOption) {
     return newNote;
 }
 
++ (Note*)reAddNote:(Note*)note
+{
+    Note* newNote = nil;
+    NSManagedObjectContext* context = [JFCoreDataManager getContext];
+    if (note && context) {
+        newNote           = [self getNoteByAPIId:note.apiNoteId];
+        newNote           = (newNote) ? newNote : [self insertInManagedObjectContext:context];
+        newNote.title     = note.title;
+        newNote.details   = note.details;
+        newNote.deleted   = @NO;
+        newNote.createdAt = note.createdAt;
+        newNote.updatedAt = note.updatedAt;
+        newNote.apiNoteId = (note.apiNoteId) ? note.apiNoteId : [NSNumber numberWithInt:-1];
+        
+        if (![[JFCoreDataManager sharedInstance] saveContext]) {
+            newNote = nil;
+        }
+    }
+    return newNote;
+}
+
++ (BOOL)markAsDeleted:(Note*)note
+{
+    BOOL updated = YES;
+    NSManagedObjectContext* context = [JFCoreDataManager getContext];
+    if (note && context) {
+        note.deleted = @YES;
+        
+        updated = [[JFCoreDataManager sharedInstance] saveContext];
+    }
+    return updated;
+}
+
 + (BOOL)removeNote:(Note*)note
 {
     BOOL removed = YES;
@@ -60,6 +94,20 @@ NSString* SortDescriptorForSortOption(NoteSortOption sortOption) {
         removed = [[JFCoreDataManager sharedInstance] saveContext];
     }
     return removed;
+}
+
++ (BOOL)removeAllNotes
+{
+    BOOL allRemoved = YES;
+    NSManagedObjectContext* context = [JFCoreDataManager getContext];
+    if (context) {
+        NSArray* allNotes = [self allNotesSortedBy:NoteSortOptionCREATED ascending:YES];
+        for (Note* note in allNotes) {
+            [context deleteObject:note];
+        }
+        allRemoved = [[JFCoreDataManager sharedInstance] saveContext];
+    }
+    return allRemoved;
 }
 
 + (BOOL)updateNote:(Note*)note withTempNote:(TempNote*)tempNote
@@ -98,6 +146,28 @@ NSString* SortDescriptorForSortOption(NoteSortOption sortOption) {
     return note;
 }
 
++ (Note*)noteWithAPIId:(NSNumber*)apiId
+{
+    Note* note = nil;
+    NSManagedObjectContext* context = [JFCoreDataManager getContext];
+    if (context) {
+        NSFetchRequest *request = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:[Note entityName]
+                                                  inManagedObjectContext:context];
+        [request setEntity:entity];
+        
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"apiNoteId = %@", apiId];
+        [request setPredicate:predicate];
+        
+        NSError *error = nil;
+        NSArray* notes = [context executeFetchRequest:request error:&error];
+        if (notes.count == 1) {
+            note = [notes lastObject];
+        }
+    }
+    return note;
+}
+
 + (NSArray*)allNotesSortedBy:(NoteSortOption)sortOption ascending:(BOOL)asc
 {
     NSArray* notes = nil;
@@ -107,6 +177,9 @@ NSString* SortDescriptorForSortOption(NoteSortOption sortOption) {
         NSEntityDescription *entity = [NSEntityDescription entityForName:[Note entityName]
                                                   inManagedObjectContext:context];
         [request setEntity:entity];
+        
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"deleted != %@", @YES];
+        [request setPredicate:predicate];
         
         NSString* key = SortDescriptorForSortOption(sortOption);
         NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:key ascending:asc];
@@ -133,6 +206,33 @@ NSString* SortDescriptorForSortOption(NoteSortOption sortOption) {
         [request setEntity:entity];
         
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"apiNoteId = %@", [NSNumber numberWithInt:-1]];
+        [request setPredicate:predicate];
+        
+        NSString* key = SortDescriptorForSortOption(NoteSortOptionCREATED);
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:key ascending:YES];
+        NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+        [request setSortDescriptors:sortDescriptors];
+        
+        NSError *error = nil;
+        notes = [context executeFetchRequest:request error:&error];
+        if (notes == nil) {
+            // Handle the error.
+        }
+    }
+    return notes;
+}
+
++ (NSArray*)allNotesMarkedForDeletion
+{
+    NSArray* notes = nil;
+    NSManagedObjectContext* context = [JFCoreDataManager getContext];
+    if (context) {
+        NSFetchRequest *request = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:[Note entityName]
+                                                  inManagedObjectContext:context];
+        [request setEntity:entity];
+        
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"deleted = %@", @YES];
         [request setPredicate:predicate];
         
         NSString* key = SortDescriptorForSortOption(NoteSortOptionCREATED);

@@ -10,6 +10,7 @@
 
 @interface NotesCollectionViewCell : UICollectionViewCell
 
-@property (weak, nonatomic) IBOutlet UILabel *noteTitle;
+@property (nonatomic, weak) Note* note;
+@property (nonatomic, weak) IBOutlet UILabel *noteTitle;
 
 @end

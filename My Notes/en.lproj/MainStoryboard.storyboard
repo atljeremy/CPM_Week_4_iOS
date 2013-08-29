@@ -60,6 +60,7 @@
                                 </constraints>
                                 <connections>
                                     <outlet property="noteTitle" destination="EHx-qL-LRk" id="SK9-Kz-Ynk"/>
+                                    <segue destination="oTZ-mh-LI6" kind="push" identifier="PresentNoteDetails" id="7lX-1q-J5N"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -101,6 +102,62 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sp0-Zd-rDk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="548" y="225"/>
+        </scene>
+        <!--Note Details View Controller - Note Details-->
+        <scene sceneID="Q1D-St-NjX">
+            <objects>
+                <viewController storyboardIdentifier="NoteDetailsViewController" id="oTZ-mh-LI6" customClass="NoteDetailsViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lDD-yH-WjD">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6g4-Vc-fs4">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Note details..." translatesAutoresizingMaskIntoConstraints="NO" id="Wwd-fn-bDv">
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OgM-XT-8eW">
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="P1F-Yo-Ysq"/>
+                                    <barButtonItem systemItem="trash" id="fae-9H-pjZ">
+                                        <connections>
+                                            <action selector="deleteNote:" destination="oTZ-mh-LI6" id="XJD-RU-cdR"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="wuH-Oo-LJd"/>
+                                    <barButtonItem systemItem="edit" id="T0z-3j-VrE"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="aP5-7r-IOi"/>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="OgM-XT-8eW" firstAttribute="trailing" secondItem="lDD-yH-WjD" secondAttribute="trailing" type="default" id="1Do-aV-RFR"/>
+                            <constraint firstAttribute="trailing" secondItem="Wwd-fn-bDv" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="7dh-9t-M83"/>
+                            <constraint firstItem="6g4-Vc-fs4" firstAttribute="top" secondItem="lDD-yH-WjD" secondAttribute="top" constant="20" symbolic="YES" type="default" id="C4f-mc-OuQ"/>
+                            <constraint firstItem="Wwd-fn-bDv" firstAttribute="bottom" secondItem="lDD-yH-WjD" secondAttribute="bottom" type="default" id="JSy-5k-JTc"/>
+                            <constraint firstItem="OgM-XT-8eW" firstAttribute="bottom" secondItem="lDD-yH-WjD" secondAttribute="bottom" type="default" id="JY1-SW-Ttm"/>
+                            <constraint firstItem="OgM-XT-8eW" firstAttribute="leading" secondItem="lDD-yH-WjD" secondAttribute="leading" type="default" id="Kvi-xh-57F"/>
+                            <constraint firstItem="Wwd-fn-bDv" firstAttribute="leading" secondItem="lDD-yH-WjD" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="U8U-62-gwQ"/>
+                            <constraint firstItem="6g4-Vc-fs4" firstAttribute="leading" secondItem="lDD-yH-WjD" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="kes-ft-jku"/>
+                            <constraint firstItem="Wwd-fn-bDv" firstAttribute="top" secondItem="6g4-Vc-fs4" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="neh-Ie-f1C"/>
+                            <constraint firstAttribute="trailing" secondItem="6g4-Vc-fs4" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="xHR-dz-yxf"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Note Details" id="Axd-g5-Tsd"/>
+                    <connections>
+                        <outlet property="noteDetails" destination="Wwd-fn-bDv" id="fre-10-xKe"/>
+                        <outlet property="noteTitle" destination="6g4-Vc-fs4" id="hcv-Pg-pYh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LBa-OA-Fhe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1090" y="-70"/>
         </scene>
         <!--New Note View Controller-->
         <scene sceneID="bHz-Pf-kdl">
@@ -169,7 +226,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wq8-PH-4xe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="964" y="225"/>
+            <point key="canvasLocation" x="1090" y="661"/>
         </scene>
     </scenes>
     <resources>

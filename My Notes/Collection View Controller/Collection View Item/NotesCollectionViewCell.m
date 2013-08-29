@@ -10,6 +10,10 @@
 
 @implementation NotesCollectionViewCell
 
-
+- (void)setNote:(Note *)note
+{
+    _note = note;
+    self.noteTitle.text = _note.title;
+}
 
 @end

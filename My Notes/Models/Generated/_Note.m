@@ -6,6 +6,7 @@
 const struct NoteAttributes NoteAttributes = {
 	.apiNoteId = @"apiNoteId",
 	.createdAt = @"createdAt",
+	.deleted = @"deleted",
 	.details = @"details",
 	.title = @"title",
 	.updatedAt = @"updatedAt",
@@ -49,6 +50,11 @@ const struct NoteFetchedProperties NoteFetchedProperties = {
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 		return keyPaths;
 	}
+	if ([key isEqualToString:@"deletedValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"deleted"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
 
 	return keyPaths;
 }
@@ -84,6 +90,32 @@ const struct NoteFetchedProperties NoteFetchedProperties = {
 
 @dynamic createdAt;
 
+
+
+
+
+
+@dynamic deleted;
+
+
+
+- (BOOL)deletedValue {
+	NSNumber *result = [self deleted];
+	return [result boolValue];
+}
+
+- (void)setDeletedValue:(BOOL)value_ {
+	[self setDeleted:[NSNumber numberWithBool:value_]];
+}
+
+- (BOOL)primitiveDeletedValue {
+	NSNumber *result = [self primitiveDeleted];
+	return [result boolValue];
+}
+
+- (void)setPrimitiveDeletedValue:(BOOL)value_ {
+	[self setPrimitiveDeleted:[NSNumber numberWithBool:value_]];
+}
 
 
 

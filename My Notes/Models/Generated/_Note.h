@@ -7,6 +7,7 @@
 extern const struct NoteAttributes {
 	__unsafe_unretained NSString *apiNoteId;
 	__unsafe_unretained NSString *createdAt;
+	__unsafe_unretained NSString *deleted;
 	__unsafe_unretained NSString *details;
 	__unsafe_unretained NSString *title;
 	__unsafe_unretained NSString *updatedAt;
@@ -20,6 +21,7 @@ extern const struct NoteFetchedProperties {
 } NoteFetchedProperties;
 
 @class User;
+
 
 
 
@@ -59,6 +61,20 @@ extern const struct NoteFetchedProperties {
 
 
 //- (BOOL)validateCreatedAt:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
+@property (nonatomic, strong) NSNumber* deleted;
+
+
+
+@property BOOL deletedValue;
+- (BOOL)deletedValue;
+- (void)setDeletedValue:(BOOL)value_;
+
+//- (BOOL)validateDeleted:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -122,6 +138,15 @@ extern const struct NoteFetchedProperties {
 
 - (NSDate*)primitiveCreatedAt;
 - (void)setPrimitiveCreatedAt:(NSDate*)value;
+
+
+
+
+- (NSNumber*)primitiveDeleted;
+- (void)setPrimitiveDeleted:(NSNumber*)value;
+
+- (BOOL)primitiveDeletedValue;
+- (void)setPrimitiveDeletedValue:(BOOL)value_;
 
 
 

@@ -72,6 +72,7 @@ static NSString* const kUUIDKey = @"UUIDKey";
                 user.apiToken = uniqueId;
                 user.apiUserId = Id;
                 [User addUser:user];
+                [AFAppWebServiceClient synchronize];
                 
                 [[NSUserDefaults standardUserDefaults] setObject:uniqueId forKey:kAPIStoredPrivateKey];
                 [[NSUserDefaults standardUserDefaults] synchronize];
@@ -102,16 +103,24 @@ static NSString* const kUUIDKey = @"UUIDKey";
     [[NSNotificationCenter defaultCenter] postNotificationName:kSyncDidStartNotification object:nil];
     [SyncR sendUnsyncedNotesToAPIWithCompletionBlock:^(NSError *error) {
         if (!error) {
-            [SyncR getNotesFromAPIWithSuccess:^(NSArray *notes) {
-                NSLog(@"NOTES: %@", notes);
-                [[NSNotificationCenter defaultCenter] postNotificationName:kSyncDidFinishNotification object:nil];
-            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                NSLog(@"Failed!");
-                [[NSNotificationCenter defaultCenter] postNotificationName:kSyncDidFinishNotification object:nil];
+            NSArray* deletedNotes = [Note allNotesMarkedForDeletion];
+            [SyncR deleteNotesFromAPI:deletedNotes withCompletionBlock:^(NSError *error) {
+                NSLog(@"Deleted Notes From API Successfully!");
+                [self getNotes];
             }];
         }
     }];
-    
+}
+
++ (void)getNotes
+{
+    [SyncR getNotesFromAPIWithSuccess:^(NSArray *notes) {
+        NSLog(@"Retrieved Notes Successfully!");
+        [[NSNotificationCenter defaultCenter] postNotificationName:kSyncDidFinishNotification object:nil];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Failed Retrieving Notes!");
+        [[NSNotificationCenter defaultCenter] postNotificationName:kSyncDidFinishNotification object:nil];
+    }];
 }
 
 @end
