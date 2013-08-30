@@ -5,16 +5,17 @@ NSString* const kNoteTitleKey = @"title";
 NSString* const kNoteDetailsKey = @"details";
 NSString* const kNoteCreatedAtKey = @"created_at";
 NSString* const kNoteUpdatedAtKey = @"updated_at";
+NSString* const kNoteAPIIdKey = @"apiNoteId";
 
 NSString* SortDescriptorForSortOption(NoteSortOption sortOption) {
     NSString* sortDescriptor = @"";
     switch (sortOption) {
         case NoteSortOptionUPDATED:
-            sortDescriptor = @"title";
+            sortDescriptor = @"updatedAt";
             break;
 
         case NoteSortOptionALPHABETICAL:
-            sortDescriptor = @"updatedAt";
+            sortDescriptor = @"title";
             break;
             
         case NoteSortOptionCREATED:
@@ -80,6 +81,7 @@ NSString* SortDescriptorForSortOption(NoteSortOption sortOption) {
         note.deleted = @YES;
         
         updated = [[JFCoreDataManager sharedInstance] saveContext];
+
     }
     return updated;
 }
@@ -146,7 +148,7 @@ NSString* SortDescriptorForSortOption(NoteSortOption sortOption) {
     return note;
 }
 
-+ (Note*)noteWithAPIId:(NSNumber*)apiId
++ (Note*)noteWithCriteria:(NSDictionary*)filterCriteria
 {
     Note* note = nil;
     NSManagedObjectContext* context = [JFCoreDataManager getContext];
@@ -156,7 +158,22 @@ NSString* SortDescriptorForSortOption(NoteSortOption sortOption) {
                                                   inManagedObjectContext:context];
         [request setEntity:entity];
         
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"apiNoteId = %@", apiId];
+        NSMutableArray* predicates = [@[] mutableCopy];
+        for (NSString* key in filterCriteria.allKeys) {
+            NSString* value = [filterCriteria objectForKey:key];
+            if ([key isEqualToString:kNoteTitleKey]) {
+                [predicates addObject:[NSPredicate predicateWithFormat:@"title = %@", value]];
+            } else if ([key isEqualToString:kNoteDetailsKey]) {
+                [predicates addObject:[NSPredicate predicateWithFormat:@"details = %@", value]];
+            } else if ([key isEqualToString:kNoteCreatedAtKey]) {
+                [predicates addObject:[NSPredicate predicateWithFormat:@"createdAt = %@", value]];
+            } else if ([key isEqualToString:kNoteUpdatedAtKey]) {
+                [predicates addObject:[NSPredicate predicateWithFormat:@"updatedAt = %@", value]];
+            } else if ([key isEqualToString:kNoteAPIIdKey]) {
+                [predicates addObject:[NSPredicate predicateWithFormat:@"apiNoteId = %@", value]];
+            }
+        }
+        NSPredicate *predicate = [NSCompoundPredicate andPredicateWithSubpredicates:predicates];
         [request setPredicate:predicate];
         
         NSError *error = nil;
@@ -178,7 +195,7 @@ NSString* SortDescriptorForSortOption(NoteSortOption sortOption) {
                                                   inManagedObjectContext:context];
         [request setEntity:entity];
         
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"deleted != %@", @YES];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"deleted == NO"];
         [request setPredicate:predicate];
         
         NSString* key = SortDescriptorForSortOption(sortOption);
@@ -232,13 +249,8 @@ NSString* SortDescriptorForSortOption(NoteSortOption sortOption) {
                                                   inManagedObjectContext:context];
         [request setEntity:entity];
         
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"deleted = %@", @YES];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"deleted == YES"];
         [request setPredicate:predicate];
-        
-        NSString* key = SortDescriptorForSortOption(NoteSortOptionCREATED);
-        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:key ascending:YES];
-        NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
-        [request setSortDescriptors:sortDescriptors];
         
         NSError *error = nil;
         notes = [context executeFetchRequest:request error:&error];

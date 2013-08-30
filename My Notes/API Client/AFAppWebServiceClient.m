@@ -72,13 +72,14 @@ static NSString* const kUUIDKey = @"UUIDKey";
                 user.apiToken = uniqueId;
                 user.apiUserId = Id;
                 [User addUser:user];
-                [AFAppWebServiceClient synchronize];
                 
                 [[NSUserDefaults standardUserDefaults] setObject:uniqueId forKey:kAPIStoredPrivateKey];
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 
                 [[Mixpanel sharedInstance] registerSuperProperties:@{@"User API Key": uniqueId}];
                 [[Mixpanel sharedInstance] track:@"Successfully registered client with API"];
+                
+                [AFAppWebServiceClient synchronize];
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error){
             NSLog(@"ERROR: %@", [error localizedDescription]);

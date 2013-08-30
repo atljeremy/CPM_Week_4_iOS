@@ -16,9 +16,10 @@ static NSString* const kCollectionCellReuseID = @"NotesCollectionViewCell";
 static NSString* const kPresentNewNoteViewController = @"PresentNewNoteViewController";
 static NSString* const kPresentNoteDetails = @"PresentNoteDetails";
 
-@interface NotesCollectionViewController ()
-@property (nonatomic, strong) User* user;
+@interface NotesCollectionViewController () <UIActionSheetDelegate>
 @property (nonatomic, strong) NSArray* notes;
+@property (nonatomic, assign) NoteSortOption sortOption;
+@property (nonatomic, assign) BOOL sortAscending;
 @end
 
 @implementation NotesCollectionViewController
@@ -42,6 +43,8 @@ static NSString* const kPresentNoteDetails = @"PresentNoteDetails";
                                              selector:@selector(loadNotes)
                                                  name:kSyncDidFinishNotification
                                                object:nil];
+    self.sortOption = NoteSortOptionCREATED;
+    self.sortAscending = NO;
     [self loadNotes];
 }
 
@@ -86,8 +89,7 @@ static NSString* const kPresentNoteDetails = @"PresentNoteDetails";
 
 - (void)loadNotes
 {
-    self.user = [User userWithNotesSortedBy:NoteSortOptionCREATED ascending:YES];
-    self.notes = [self.user.notes allObjects];
+    self.notes = [Note allNotesSortedBy:self.sortOption ascending:self.sortAscending];
     [self.collectionView reloadData];
     [self stopRotatingArrows];
 }
@@ -99,6 +101,18 @@ static NSString* const kPresentNoteDetails = @"PresentNoteDetails";
             Note* note = ((NotesCollectionViewCell*)sender).note;
             [(NoteDetailsViewController*)segue.destinationViewController setNote:note];
         }
+    }
+}
+
+- (void)longPress:(UIGestureRecognizer*)recognizer
+{
+    if (recognizer.state == UIGestureRecognizerStateBegan) {
+        UIActionSheet* sheet = [[UIActionSheet alloc] initWithTitle:@"Sort By"
+                                            delegate:self
+                                   cancelButtonTitle:@"Cancel"
+                              destructiveButtonTitle:nil
+                                   otherButtonTitles:@"Date Created", @"Date Updated", @"Alphabetical", nil];
+        [sheet showInView:self.view];
     }
 }
 
@@ -116,12 +130,6 @@ static NSString* const kPresentNoteDetails = @"PresentNoteDetails";
     UILongPressGestureRecognizer *recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
     [cell addGestureRecognizer:recognizer];
     [cell setNote:note];
-//    cell.photo = photo;
-//    if (!cell.isSelected) {
-//        cell.checkMark.hidden = YES;
-//    } else {
-//        cell.checkMark.hidden = NO;
-//    }
     return cell;
 
 }
@@ -136,6 +144,33 @@ static NSString* const kPresentNoteDetails = @"PresentNoteDetails";
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
     return UIEdgeInsetsMake(5, 5, 5, 5);
+}
+
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch (buttonIndex) {
+        case 0:
+            self.sortOption = NoteSortOptionCREATED;
+            self.sortAscending = NO;
+            break;
+            
+        case 1:
+            self.sortOption = NoteSortOptionUPDATED;
+            self.sortAscending = NO;
+            break;
+            
+        case 2:
+            self.sortOption = NoteSortOptionALPHABETICAL;
+            self.sortAscending = YES;
+            break;
+            
+        default:
+            break;
+    }
+    
+    [self loadNotes];
 }
 
 @end

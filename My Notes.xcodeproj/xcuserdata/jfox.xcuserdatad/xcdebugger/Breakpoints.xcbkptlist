@@ -7,32 +7,6 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "My Notes/API Client/AFAppWebServiceClient.m"
-         timestampString = "399430391.624156"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "85"
-         endingLineNumber = "85"
-         landmarkName = "+registerClientWithAPI"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "My Notes/API Client/AFAppWebServiceClient.m"
-         timestampString = "399342718.312243"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "65"
-         endingLineNumber = "65"
-         landmarkName = "+registerClientWithAPI"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "My Notes/View Controllers/ViewController.m"
          timestampString = "399172348.543527"
          startingColumnNumber = "9223372036854775807"
@@ -47,26 +21,48 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "My Notes/Application/Synchronization/SyncR.m"
-         timestampString = "399432573.448244"
+         timestampString = "399511469.898573"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "84"
-         endingLineNumber = "84"
-         landmarkName = "+sendUnsyncedNotesToAPIWithCompletionBlock:"
+         startingLineNumber = "72"
+         endingLineNumber = "72"
+         landmarkName = "+getNotesFromAPIWithSuccess:failure:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "My Notes/Models/Note.m"
-         timestampString = "399435550.573487"
+         filePath = "My Notes/Managers/JFCoreDataManager.m"
+         timestampString = "399512235.602746"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "237"
+         endingLineNumber = "237"
+         landmarkName = "-contextHasChanged:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "My Notes/Collection View Controller/NotesCollectionViewController.m"
+         timestampString = "399518845.225212"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "153"
          endingLineNumber = "153"
-         landmarkName = "+noteWithAPIId:"
+         landmarkName = "-actionSheet:clickedButtonAtIndex:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
+   <ExceptionBreakpoints>
+      <ExceptionBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         scope = "0"
+         stopOnStyle = "0">
+      </ExceptionBreakpoint>
+   </ExceptionBreakpoints>
 </Bucket>

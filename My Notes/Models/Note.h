@@ -6,6 +6,7 @@ NSString* const kNoteTitleKey;
 NSString* const kNoteDetailsKey;
 NSString* const kNoteCreatedAtKey;
 NSString* const kNoteUpdatedAtKey;
+NSString* const kNoteAPIIdKey;
 
 typedef NS_ENUM(NSInteger, NoteSortOption) {
     NoteSortOptionCREATED,
@@ -26,7 +27,7 @@ extern NSString* SortDescriptorForSortOption(NoteSortOption sortOption);
 + (NSArray*)allNotesSortedBy:(NoteSortOption)sortOption ascending:(BOOL)asc;
 + (NSArray*)allUnsyncedNotes;
 + (NSArray*)allNotesMarkedForDeletion;
-+ (Note*)noteWithAPIId:(NSNumber*)apiId;
++ (Note*)noteWithCriteria:(NSDictionary*)filterCriteria;
 
 - (BOOL)updateUpdatedAt;
 - (BOOL)updateApiId:(NSNumber*)apiId;

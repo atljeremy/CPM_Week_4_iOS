@@ -12,5 +12,6 @@
 
 @property (nonatomic, weak) Note* note;
 @property (nonatomic, weak) IBOutlet UILabel *noteTitle;
+@property (weak, nonatomic) IBOutlet UILabel *noteDate;
 
 @end

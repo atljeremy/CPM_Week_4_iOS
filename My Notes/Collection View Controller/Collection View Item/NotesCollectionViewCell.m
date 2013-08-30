@@ -14,6 +14,10 @@
 {
     _note = note;
     self.noteTitle.text = _note.title;
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+    self.noteDate.text = [dateFormatter stringFromDate:_note.createdAt];
 }
 
 @end
